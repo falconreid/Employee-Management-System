@@ -49,13 +49,13 @@ function employeeQuestions() {
         case "Add Employee":
           addEmployee();
           break;
-        case "View Department":
+        case "View Departments":
           viewDepartment();
           break;
-        case "View Role":
+        case "View Roles":
           viewRole();
           break;
-        case "View Employee":
+        case "View Employees":
           viewEmployee();
           break;
         case "Update Employee":
@@ -94,6 +94,7 @@ function addDepartment() {
     });
 }
 
+// add role function using inquirer
 function addRole() {
   inquirer
     .prompt([
@@ -128,6 +129,7 @@ function addRole() {
     });
 }
 
+// add employees
 function addEmployee() {
   inquirer
     .prompt([
@@ -165,6 +167,37 @@ function addEmployee() {
         }
       );
     });
+}
+
+// view departments
+function viewDepartment() {
+  let query = "SELECT * FROM department";
+  connection.query(query, (err, res) => {
+    if (err) throw err;
+    console.table(res);
+    employeeQuestions();
+  });
+}
+
+// view roles
+function viewRole() {
+  let query = "SELECT * FROM roles";
+  connection.query(query, (err, res) => {
+    if (err) throw err;
+    console.log(err);
+    console.table(res);
+    employeeQuestions();
+  });
+}
+
+// view employees
+function viewEmployee() {
+  let query = "SELECT * FROM employee";
+  connection.query(query, (err, res) => {
+    if (err) throw err;
+    console.table(res);
+    employeeQuestions();
+  });
 }
 
 // fancy intro logo (for ascii)
