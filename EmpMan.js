@@ -122,6 +122,7 @@ function addRole() {
           console.log(
             `The Organizational Role of ${res.title} has been created.`
           );
+          employeeQuestions();
         }
       );
     });
@@ -160,6 +161,7 @@ function addEmployee() {
           console.log(
             `The employee ${res.first_name} ${res.last_name} has been added.`
           );
+          employeeQuestions();
         }
       );
     });

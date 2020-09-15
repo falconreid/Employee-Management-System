@@ -4,6 +4,7 @@ USE employeeDB;
 INSERT INTO department
   (dept_name)
 VALUES
+  ("Executive"),
   ("Engineering"),
   ("Legal"),
   ("Sales");
@@ -11,17 +12,21 @@ VALUES
 INSERT INTO roles
   (title, salary)
 VALUES
-  ("Big Bad Ass Engineer", 120000),
-  ("Mid Bad Ass Engineer", 65000),
-  ("Big Lying Ass", 120000),
-  ("Mid Lying Ass", 65000),
-  ("Bad Ass Sales Guy", 120000),
-  ("Avg Sales Guy", 65000);
+  ("Chief Executive Officer", 250000),
+  ("Chief Information Officer", 200000),
+  ("Lead Engineer", 120000),
+  ("Associate Engineer", 65000),
+  ("Lead Legal Counsel", 120000),
+  ("Associate Legal Counsel", 65000),
+  ("Lead Sales", 120000),
+  ("Associate Sales", 65000);
 
 
 INSERT INTO employee
   (first_name, last_name)
 VALUES
+  ("Jon", "Wisenheimer"),
+  ("Beau", "Borland"),
   ("Johnny", "Jingleheimer"),
   ("Jenny", "Johnsonville"),
   ("Sue", "Thepantsoff"),
