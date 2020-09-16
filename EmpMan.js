@@ -32,10 +32,6 @@ function employeeQuestions() {
         "View Roles",
         "View Employees",
         "Update Employee",
-        "I Am Done",
-        //   "Delete Department",
-        //   "Delete Role",
-        //   "Delete Employee"
       ],
     })
     .then((answers) => {
@@ -61,7 +57,7 @@ function employeeQuestions() {
         case "Update Employee":
           updateEmployee();
           break;
-        case "I Am Done":
+        case "Exit":
           console.log("Transaction Completed! Exiting Employee Tracker");
           if (err) throw err;
           console.log(err);
