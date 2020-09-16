@@ -196,6 +196,24 @@ function viewEmployee() {
   });
 }
 
+function updateEmployee() {
+  let query = "SELECT * FROM employee";
+
+  const employee = connection.query(query, (err, res) => {
+    if (err) throw err;
+    console.table(res);
+  });
+
+  // inquirer
+  // .prompt({
+  //   message: "Please Choose an Employee to Update",
+  //   type: "list",
+  //   name: "choice",
+  //   choices: [
+
+  //   ]
+}
+
 // fancy intro logo (for ascii)
 const showLogo = () => {
   console.log("╔═╗╔╦╗╔═╗╦  ╔═╗╦ ╦╔═╗╔═╗");
