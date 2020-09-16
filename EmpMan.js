@@ -197,22 +197,31 @@ function viewEmployee() {
 }
 
 function updateEmployee() {
-  let query = "SELECT * FROM employee";
-
-  const employee = connection.query(query, (err, res) => {
+  let query = `SELECT employee.id, employee.first_name, employee.last_name, employee.role_id, roles.title FROM roles INNER JOIN employee ON employee.role_id = roles.id`;
+  // log out table to view all employees and their position.
+  const employees = connection.query(query, (err, res) => {
     if (err) throw err;
     console.table(res);
   });
+  // create variable to be able to use employee response in inquirer prompt
+  const employeesChoice = employees.map(() => {
 
-  // inquirer
-  // .prompt({
-  //   message: "Please Choose an Employee to Update",
-  //   type: "list",
-  //   name: "choice",
-  //   choices: [
 
-  //   ]
-}
+  });
+    
+  connection.query("SELECT * FROM roles; ", (err, res) => {
+      if (err) throw err;
+  // create variable to use roles response in inquirer
+      const rolesChoice = res.roles;
+
+  });
+  inquirer
+  .prompt({
+    message: "Please Choose an Employee to Update",
+    type: "list",
+    name: "choice",
+    choices: employeesChoice()
+}).then {function something(){};};
 
 // fancy intro logo (for ascii)
 const showLogo = () => {
