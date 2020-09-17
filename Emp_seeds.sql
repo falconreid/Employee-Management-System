@@ -7,7 +7,8 @@ VALUES
   ("Executive"),
   ("Engineering"),
   ("Legal"),
-  ("Sales");
+  ("Sales"),
+  ("Marketing");
 
 INSERT INTO roles
   (title, salary, department_id)
@@ -19,7 +20,8 @@ VALUES
   ("Lead Legal Counsel", 120000, 3),
   ("Associate Legal Counsel", 65000, 3),
   ("Lead Sales", 120000, 4),
-  ("Associate Sales", 65000, 4);
+  ("Associate Sales", 65000, 4),
+  ("Lead Marketing", 120000, 5);
 
 
 INSERT INTO employee
@@ -32,7 +34,9 @@ VALUES
   ("Sue", "Thepantsoff",  5, 1),
   ("Takemto", "Slaughterhause", 6, 5),
   ("Yuno", "Yu Wa Na Buy", 7, 1),
-  ("Sir Close", "Alot", 8, 7);
+  ("Sir Close", "Alot", 8, 7),
+  ("T. Ruth", "Inadvertizin", 1, 9);
+  
 
 
 

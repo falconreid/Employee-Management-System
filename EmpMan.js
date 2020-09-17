@@ -32,6 +32,7 @@ function employeeQuestions() {
         "View Roles",
         "View Employees",
         "Update Employee",
+        "Exit",
       ],
     })
     .then((answers) => {
@@ -59,10 +60,8 @@ function employeeQuestions() {
           break;
         case "Exit":
           console.log("Transaction Completed! Exiting Employee Tracker");
-          if (err) throw err;
-          console.log(err);
-          break;
           connection.end();
+          break;
       }
     });
 }
@@ -152,7 +151,7 @@ function addEmployee() {
     ])
     .then(function (res) {
       connection.query(
-        "INSERT INTO employee(first_name, last_name, manager_id, role_id ) VALUES(?,?,?,?)",
+        "INSERT INTO employee(first_name, last_name, role_id, manager_id ) VALUES(?,?,?,?)",
         [res.first_name, res.last_name, res.role_id, res.manager_id],
         function (err) {
           if (err) throw err;
@@ -250,7 +249,6 @@ function updateEmployee(employeeList, roleList) {
       },
     ])
     .then((answer) => {
-      console.log(answer);
       return connection.query(
         "UPDATE employee SET ? WHERE ?",
         [
