@@ -14,8 +14,7 @@ connection.connect(function (err) {
   if (err) throw err;
   console.log("connected as id " + connection.threadId);
   showLogo();
-  // employeeQuestions();
-  getDBData();
+  employeeQuestions();
 });
 
 // Inquirer Prompts
@@ -56,7 +55,7 @@ function employeeQuestions() {
           viewEmployee();
           break;
         case "Update Employee":
-          updateEmployee();
+          getDBData();
           break;
         case "Exit":
           console.log("Transaction Completed! Exiting Employee Tracker");
@@ -236,7 +235,7 @@ function updateEmployee(employeeList, roleList) {
   // log out table to view all employees and their position.
 
   inquirer
-    .prompt(
+    .prompt([
       {
         message: "Please Choose an Employee to Update",
         type: "list",
@@ -248,10 +247,22 @@ function updateEmployee(employeeList, roleList) {
         type: "list",
         name: "titles",
         choices: roleList,
-      }
-    )
-    .then((answers) => {});
-  // function something(){};
+      },
+    ])
+    .then((answer) => {
+      console.log(answer);
+      return connection.query("UPDATE employee SET ? WHERE ?", [
+        {
+          role_id: answer.newRoleId,
+        },
+        {
+          id: answer.employeeId,
+        },
+
+        console.log("Employee Role Updated"),
+        // employeeQuestions(),
+      ]);
+    });
 }
 
 // fancy intro logo (for ascii)
