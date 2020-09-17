@@ -14,7 +14,8 @@ connection.connect(function (err) {
   if (err) throw err;
   console.log("connected as id " + connection.threadId);
   showLogo();
-  employeeQuestions();
+  // employeeQuestions();
+  getDBData();
 });
 
 // Inquirer Prompts
@@ -196,32 +197,62 @@ function viewEmployee() {
   });
 }
 
-function updateEmployee() {
+function getDBData() {
+  // query is joining employee data with roles data to show thier name and title
   let query = `SELECT employee.id, employee.first_name, employee.last_name, employee.role_id, roles.title FROM roles INNER JOIN employee ON employee.role_id = roles.id`;
-  // log out table to view all employees and their position.
   const employees = connection.query(query, (err, res) => {
     if (err) throw err;
+    // create variable to be able to use employee response in inquirer prompt
+    console.log("Getting Employees...");
     console.table(res);
-  });
-  // create variable to be able to use employee response in inquirer prompt
-  const employeesChoice = employees.map(() => {
+    const employeeChoices = res.map((person) => {
+      const choice = {
+        name: person.first_name + " " + person.last_name,
+        value: person.id,
+      };
+      return choice;
+    });
 
-
-  });
-    
-  connection.query("SELECT * FROM roles; ", (err, res) => {
+    let query = "SELECT * FROM roles";
+    const empRoles = connection.query(query, (err, res) => {
       if (err) throw err;
-  // create variable to use roles response in inquirer
-      const rolesChoice = res.roles;
 
+      // create variable to use roles response in inquirer
+      const titleChoice = res.map((data) => {
+        const rolesChoice = {
+          name: data.title,
+          value: data.id,
+        };
+        return rolesChoice;
+      });
+      console.table(titleChoice);
+
+      updateEmployee(employeeChoices, titleChoice);
+    });
   });
+}
+
+function updateEmployee(employeeList, roleList) {
+  // log out table to view all employees and their position.
+
   inquirer
-  .prompt({
-    message: "Please Choose an Employee to Update",
-    type: "list",
-    name: "choice",
-    choices: employeesChoice()
-}).then {function something(){};};
+    .prompt(
+      {
+        message: "Please Choose an Employee to Update",
+        type: "list",
+        name: "employees",
+        choices: employeeList,
+      },
+      {
+        message: "What Role are they Changing to?",
+        type: "list",
+        name: "titles",
+        choices: roleList,
+      }
+    )
+    .then((answers) => {});
+  // function something(){};
+}
 
 // fancy intro logo (for ascii)
 const showLogo = () => {
