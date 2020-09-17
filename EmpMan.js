@@ -251,17 +251,23 @@ function updateEmployee(employeeList, roleList) {
     ])
     .then((answer) => {
       console.log(answer);
-      return connection.query("UPDATE employee SET ? WHERE ?", [
-        {
-          role_id: answer.newRoleId,
-        },
-        {
-          id: answer.employeeId,
-        },
-
-        console.log("Employee Role Updated"),
-        // employeeQuestions(),
-      ]);
+      return connection.query(
+        "UPDATE employee SET ? WHERE ?",
+        [
+          {
+            role_id: answer.titles,
+          },
+          {
+            id: answer.employees,
+          },
+          // employeeQuestions(),
+        ],
+        function (err, result) {
+          console.log(err);
+          console.log(`Employee Role has been updated to ${answer.titles}`);
+          employeeQuestions();
+        }
+      );
     });
 }
 
